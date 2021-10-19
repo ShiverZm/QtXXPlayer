@@ -15,6 +15,7 @@ public:
 
 public slots:
 	void open();
+	void openFile(QString name);
 	void sliderPress();
 	void sliderRelease();
 	void play();

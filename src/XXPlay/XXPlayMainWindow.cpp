@@ -1,5 +1,6 @@
 #include "XXPlayMainWindow.h"
 #include "XFFmpeg.h"
+#include "XAudioPlay.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -20,6 +21,8 @@ XXPlayMainWindow::XXPlayMainWindow(QWidget *parent)
 {
     ui.setupUi(this);
 	startTimer(40);
+
+	openFile("E:\\PRED-042.mp4");
 }
 
 void XXPlayMainWindow::play()
@@ -78,14 +81,8 @@ void XXPlayMainWindow::sliderRelease()
 	XFFmpeg::Get()->Seek(pos);
 }
 
-void XXPlayMainWindow::open()
-{
-	QString name = QFileDialog::getOpenFileName(
-		this, QString::fromLocal8Bit("选择视频文件"));
-	if (name.isEmpty()) {
-		return;
-	}
-		
+
+void XXPlayMainWindow::openFile(QString name) {
 	this->setWindowTitle(name);
 	int totalMs = XFFmpeg::Get()->Open(name.toLocal8Bit());
 
@@ -94,12 +91,32 @@ void XXPlayMainWindow::open()
 		QMessageBox::information(this, "err", "file open failed!");
 		return;
 	}
+
+	XAudioPlay::Get()->sampleRate = XFFmpeg::Get()->sampleRate;
+	XAudioPlay::Get()->channel = XFFmpeg::Get()->channel;
+	XAudioPlay::Get()->sampleSize = 16;
+	XAudioPlay::Get()->Start();
+	
 	char buf[1024] = { 0 };
 	int min = (totalMs / 1000) / 60;
 	int sec = (totalMs / 1000) % 60;
 	sprintf(buf, "%03d:%02d", min, sec);
 	ui.totaltime->setText(buf);
-	XFFmpeg::Get()->isPlay = true;
+	//XFFmpeg::Get()->isPlay = true;
 
-	this->update();
+	isPlay = false;
+	play();
+
+	//this->update();
+}
+
+void XXPlayMainWindow::open()
+{
+	QString name = QFileDialog::getOpenFileName(
+		this, QString::fromLocal8Bit("选择视频文件"));
+	if (name.isEmpty()) {
+		return;
+	}
+
+	openFile(name);
 }

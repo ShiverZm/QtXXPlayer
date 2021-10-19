@@ -22,6 +22,7 @@ int XFFmpeg::Open(const char *path)
 		printf("open %s failed: %s\n", path, errorbuf);
 		return 0;
 	}
+
 	totalMs = ((ic->duration / AV_TIME_BASE)*1000);
 	
 	for (int i = 0; i < ic->nb_streams; i++)
@@ -171,9 +172,9 @@ int XFFmpeg::Decode(const AVPacket *pkt)
 	}
 	mutex.unlock();
 	int p = (frame->pts *r2d(ic->streams[pkt->stream_index]->time_base)) * 1000;
-	//if (pkt->stream_index == audioStream) { 
+	if (pkt->stream_index == audioStream) { 
 		this->m_pts = p;
-	//}
+	}
 	return p;
 }
 bool XFFmpeg::Seek(float pos)
@@ -280,7 +281,6 @@ XFFmpeg::XFFmpeg()
 	errorbuf[0] = '\0';
 	av_register_all();
 }
-
 
 XFFmpeg::~XFFmpeg()
 {

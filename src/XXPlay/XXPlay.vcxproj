@@ -105,6 +105,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="XAudioPlay.cpp" />
     <ClCompile Include="XXSlider.cpp" />
     <QtRcc Include="XXPlayMainWindow.qrc" />
     <QtUic Include="XXPlayMainWindow.ui" />
@@ -118,6 +119,7 @@
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="VideoThread.h" />
+    <ClInclude Include="XAudioPlay.h" />
     <ClInclude Include="XXSlider.h" />
     <CustomBuild Include="VideoWidget.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I.\..\SDK\boost" "-I.\..\inc"

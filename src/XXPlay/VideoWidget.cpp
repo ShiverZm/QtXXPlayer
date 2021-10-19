@@ -45,4 +45,5 @@ void VideoWidget::timerEvent(QTimerEvent * pEvent)
 
 VideoWidget::~VideoWidget()
 {
+
 }
