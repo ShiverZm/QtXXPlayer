@@ -50,3 +50,8 @@ compile_commands.json
 
 # QtCreator local machine specific files for imported projects
 *creator.user*
+/tmp/*.obj
+/tmp/*.log
+/tmp/*.pdb
+/tmp/*.res
+XXPlay.tlog

@@ -75,5 +75,5 @@ void VideoThread::run()
 
 VideoThread::~VideoThread()
 {
-
+	
 }

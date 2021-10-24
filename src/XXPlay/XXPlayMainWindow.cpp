@@ -17,10 +17,10 @@ static bool isPlay = true;
 (:/XXPlayMainWindow/Resources/play_normal.png);}"
 
 XXPlayMainWindow::XXPlayMainWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
 {
     ui.setupUi(this);
-	startTimer(40);
+	startTimer(30);
 
 	openFile("E:\\PRED-042.mp4");
 }
@@ -83,6 +83,10 @@ void XXPlayMainWindow::sliderRelease()
 
 
 void XXPlayMainWindow::openFile(QString name) {
+	if (name.isEmpty()){
+		return;
+	}
+
 	this->setWindowTitle(name);
 	int totalMs = XFFmpeg::Get()->Open(name.toLocal8Bit());
 
@@ -109,7 +113,7 @@ void XXPlayMainWindow::openFile(QString name) {
 
 	//this->update();
 }
-
+  
 void XXPlayMainWindow::open()
 {
 	QString name = QFileDialog::getOpenFileName(

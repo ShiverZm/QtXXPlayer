@@ -1,9 +1,9 @@
 #pragma once
 
-#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QWidget>
 #include "ui_XXPlayMainWindow.h"
 
-class XXPlayMainWindow : public QMainWindow
+class XXPlayMainWindow : public QWidget
 {
     Q_OBJECT
 
