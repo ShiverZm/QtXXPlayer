@@ -1,6 +1,7 @@
 #include "XAudioPlay.h"
 #include <QAudioOutput>
 #include <QThread>
+#include <qmutex.h>
 class CXAudioPlay :public XAudioPlay
 {
 public:
@@ -75,8 +76,9 @@ public:
 		if (!data || datasize <= 0)
 			return false;
 		mutex.lock();
-		if (io)
+		if (io){
 			io->write(data, datasize);
+		}
 		mutex.unlock();
 		return true;
 	}

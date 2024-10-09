@@ -3,6 +3,7 @@
 #include "VideoThread.h"
 #include <QPainter>
 
+extern bool isexit;
 
 VideoWidget::VideoWidget(QWidget * parent):QOpenGLWidget(parent)
 {
@@ -45,5 +46,6 @@ void VideoWidget::timerEvent(QTimerEvent * pEvent)
 
 VideoWidget::~VideoWidget()
 {
-
+	isexit = true;
+	VideoThread::Get()->terminate();
 }
